@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Borealis2tsx.Server.props" />
+</Project>

@@ -1,0 +1,2 @@
+C:\Users\felix\OneDrive - Universitetet i Stavanger\Desktop\Bachelor\Borealis2tsx\borealis2tsx.client\obj\Debug\borealis2tsx.client.esproj.CoreCompileInputs.cache
+C:\Users\felix\OneDrive - Universitetet i Stavanger\Desktop\Bachelor\UIS-AeroSpace-GUI-Bac-2024\Borealis2tsx\borealis2tsx.client\obj\Debug\borealis2tsx.client.esproj.CoreCompileInputs.cache
