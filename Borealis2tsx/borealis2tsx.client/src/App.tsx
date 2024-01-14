@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import './App.css';
 
 interface Forecast {
@@ -6,49 +6,60 @@ interface Forecast {
 }
 
 function App() {
-    const [Dataline, setDataline] = useState<Forecast[]>();
-
+    const [Dataline, setDataline] = useState<Forecast>();
+    console.log(Dataline)
     useEffect(() => {
-        populateWeatherData();
+        const fetchData = async () => {
+            await ReadDataPortLine();
+        };
+
+        const intervalId = setInterval(() => {
+            fetchData()
+        }, 750);
+
+        // Cleanup the interval on component unmount
+        return () => {
+            clearInterval(intervalId);
+        };
     }, []);
-    
+
     const contents = Dataline === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
+        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a
+            href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em>
+        </p>
         : <div className={'flex justify-center items-center justify-items-center content-center'}>
             <table className="table table-striped text-black justify-self-center">
                 <thead>
-                    <tr className={"bg-[#FFF]"}>
-                        <th>Temp[graderC]</th>
-                        <th>Pressure[mbar]</th>
-                        <th>altitude[m]</th>
-                        <th>accX[mg]</th>
-                        <th>accY[mg]</th>
-                        <th>accZ[mg]</th>
-                        <th>gyroX[degrees/s]</th>
-                        <th>gyroY[degrees/s]</th>
-                        <th>gyroZ[degrees/s]</th>
-                        <th>magX[µT]</th>
-                        <th>magY[µT]</th>
-                        <th>magZ[µT]</th>
-                    </tr>
+                <tr className={"bg-[#FFF]"}>
+                    <th>Temp[graderC]</th>
+                    <th>Pressure[mbar]</th>
+                    <th>altitude[m]</th>
+                    <th>accX[mg]</th>
+                    <th>accY[mg]</th>
+                    <th>accZ[mg]</th>
+                    <th>gyroX[degrees/s]</th>
+                    <th>gyroY[degrees/s]</th>
+                    <th>gyroZ[degrees/s]</th>
+                    <th>magX[µT]</th>
+                    <th>magY[µT]</th>
+                    <th>magZ[µT]</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {Dataline.map((data, index: number) =>
-                        <tr className={`${index % 2 === 0 ? "bg-[#F2F2F2]" : "bg-[#FFF]" }`}>
-                            <td>{data.dataline[0]}</td>
-                            <td>{data.dataline[1]}</td>
-                            <td>{data.dataline[2]}</td>
-                            <td>{data.dataline[3]}</td>
-                            <td>{data.dataline[4]}</td>
-                            <td>{data.dataline[5]}</td>
-                            <td>{data.dataline[6]}</td>
-                            <td>{data.dataline[7]}</td>
-                            <td>{data.dataline[8]}</td>
-                            <td>{data.dataline[9]}</td>
-                            <td>{data.dataline[10]}</td>
-                            <td>{data.dataline[11]}</td>
-                        </tr>
-                    )}
+                <tr>
+                    <td>{Dataline.dataline[0]}</td>
+                    <td>{Dataline.dataline[1]}</td>
+                    <td>{Dataline.dataline[2]}</td>
+                    <td>{Dataline.dataline[3]}</td>
+                    <td>{Dataline.dataline[4]}</td>
+                    <td>{Dataline.dataline[5]}</td>
+                    <td>{Dataline.dataline[6]}</td>
+                    <td>{Dataline.dataline[7]}</td>
+                    <td>{Dataline.dataline[8]}</td>
+                    <td>{Dataline.dataline[9]}</td>
+                    <td>{Dataline.dataline[10]}</td>
+                    <td>{Dataline.dataline[11]}</td>
+                </tr>
                 </tbody>
             </table>
         </div>;
@@ -63,14 +74,14 @@ function App() {
         </div>
     );
 
-    async function populateWeatherData() {
+    async function ReadDataPortLine() {
         const response = await fetch('readportdata');
         const data = await response.json();
         console.log(data)
-        console.log(data[0])
-        console.log(data[0].dataline, typeof data[0])
-        console.log(data[0].dataline)
-        setDataline(data); 
+        console.log(data)
+        console.log(data.dataline, typeof data[0])
+        console.log(data.dataline)
+        setDataline(data);
     }
 }
 

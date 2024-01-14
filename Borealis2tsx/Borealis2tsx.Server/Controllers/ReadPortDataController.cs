@@ -1,4 +1,7 @@
+using System;
 using System.IO.Ports;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Borealis2tsx.Server.Controllers
@@ -20,22 +23,23 @@ namespace Borealis2tsx.Server.Controllers
         }
 
         [HttpGet(Name = "GetReadPortData")]
-        public IEnumerable<ReadDataPort> Get()
+        public ReadDataPort Get()
         {
-            Console.WriteLine("Serial read init");
             SerialPort port = new SerialPort("COM3", 115200, Parity.None, 8, StopBits.One);
             port.Handshake = Handshake.None;
             port.Open();
+            string dataLine = port.ReadLine();
+            string dataLine2 = port.ReadLine();
+            port.Close();
+            /*
             for(int i = 0; i < 100;  i++){
                 Console.WriteLine(port.ReadLine());
             }
-            string dataLine = port.ReadLine();
-            port.Close();
-            return Enumerable.Range(1, 5).Select(index => new ReadDataPort
+            */
+            return new ReadDataPort
             {
-                Dataline = dataLine.Split(" ")
-            })
-            .ToArray();
+                Dataline = dataLine2.Split(" ")
+            };
             // Temp[graderC] Pressure[mbar] altitude[m] accX[mg] accY[mg] accZ[mg] gyroX[degrees/s] gyroY[degrees/s] gyroZ[degrees/s] magX[µT] magY[µT] magZ[µT]  
         }
     }
