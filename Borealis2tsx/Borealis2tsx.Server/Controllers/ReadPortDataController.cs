@@ -38,6 +38,9 @@ namespace Borealis2tsx.Server.Controllers
                     Dataline = ["0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0"]
                 };
             }
+            // First dataLine is maybe read from the middle of the line
+            // dataLine is just read and "thrown away"
+            // dataLine2 is the data being sent to UI
             string dataLine = port.ReadLine();
             string dataLine2 = port.ReadLine();
             port.Close();
