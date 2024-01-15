@@ -20,7 +20,10 @@ npm install
 ```
 
 ### Tailwind 
-[Tailwind documentation](https://tailwindcss.com/docs/installation)
+[Tailwind documentation](https://tailwindcss.com/docs/)
+
+### Dayjs 
+[Dayjs documentation](https://day.js.org/docs/en/installation/typescript)
 
 ## C# .Net
 This application uses C# .Net as a backend service. It uses system.IO.Ports to communicate between serial port and UI.

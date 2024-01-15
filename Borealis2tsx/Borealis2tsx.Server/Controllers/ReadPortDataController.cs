@@ -1,5 +1,6 @@
 using System;
 using System.IO.Ports;
+using System.Runtime.InteropServices.JavaScript;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -35,14 +36,15 @@ namespace Borealis2tsx.Server.Controllers
                 Console.WriteLine(e);
                 return new ReadDataPort
                 {
-                    Dataline = ["0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0"]
+                    Dataline = ["0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0"]
                 };
             }
             // First dataLine is maybe read from the middle of the line
             // dataLine is just read and "thrown away"
             // dataLine2 is the data being sent to UI
             string dataLine = port.ReadLine();
-            string dataLine2 = port.ReadLine();
+            string datetime = DateTime.Now.ToString().Replace(" ", "T");
+            string dataLine2 = datetime + " " + port.ReadLine();
             port.Close();
             return new ReadDataPort
             {
