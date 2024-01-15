@@ -11,11 +11,6 @@ namespace Borealis2tsx.Server.Controllers
     [Route("[controller]")]
     public class ReadPortDataController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<ReadPortDataController> _logger;
 
         public ReadPortDataController(ILogger<ReadPortDataController> logger)
