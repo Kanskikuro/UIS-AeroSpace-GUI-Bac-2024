@@ -26,16 +26,21 @@ namespace Borealis2tsx.Server.Controllers
         public ReadDataPort Get()
         {
             SerialPort port = new SerialPort("COM3", 115200, Parity.None, 8, StopBits.One);
-            port.Handshake = Handshake.None;
-            port.Open();
+            try
+            {
+                port.Open();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ReadDataPort
+                {
+                    Dataline = ["0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0"]
+                };
+            }
             string dataLine = port.ReadLine();
             string dataLine2 = port.ReadLine();
             port.Close();
-            /*
-            for(int i = 0; i < 100;  i++){
-                Console.WriteLine(port.ReadLine());
-            }
-            */
             return new ReadDataPort
             {
                 Dataline = dataLine2.Split(" ")
