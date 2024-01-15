@@ -19,3 +19,16 @@ th, td {
     padding-left: 1rem;
     padding-right: 1rem;
 }
+#LiveDataContent{
+    display: flex;
+    background-color: white;
+    color: black;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    width: 750px;
+}
+#LiveDataContent div{
+    width: 250px;
+    padding: 20px;
+}
