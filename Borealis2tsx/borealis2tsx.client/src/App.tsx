@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import './App.css';
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 interface ReadDataPort {
@@ -34,7 +34,7 @@ function App() {
     async function ReadDataPortLine() {
         const response = await fetch('readportdata');
         const data: ReadDataPort = await response.json();
-        var elapsed : number = ((new Date()).getTime() - (startingTime).getTime())/1000;
+        const elapsed: number = ((new Date()).getTime() - (startingTime).getTime()) / 1000;
         data.dataline.push(String(elapsed))
         setDataline(data);
         
