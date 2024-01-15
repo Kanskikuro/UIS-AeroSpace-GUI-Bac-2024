@@ -9,6 +9,7 @@
       "Borealis2tsx.Server/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.SpaProxy": "8.0.1",
+          "Node.js": "5.3.0",
           "Swashbuckle.AspNetCore": "6.4.0",
           "System.IO.Ports": "8.0.0"
         },
@@ -33,6 +34,7 @@
           }
         }
       },
+      "Node.js/5.3.0": {},
       "runtime.linux-arm.runtime.native.System.IO.Ports/8.0.0": {
         "runtimeTargets": {
           "runtimes/linux-arm/native/libSystem.IO.Ports.Native.so": {
@@ -178,6 +180,13 @@
       "sha512": "sha512-Nug3rO+7Kl5/SBAadzSMAVgqDlfGjJZ0GenQrLywJ84XGKO0uRqkunz5Wyl0SDwcR71bAATXvSdbdzPrYRYKGw==",
       "path": "microsoft.openapi/1.2.3",
       "hashPath": "microsoft.openapi.1.2.3.nupkg.sha512"
+    },
+    "Node.js/5.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WebrKeV0cXE4TaYriZQfDRNO/UMYnlQgR/CrHEx4kLgiRsY6F0Ve2UVS7qDHQHAjj/KXo3ygJY6HDhf91hwJDw==",
+      "path": "node.js/5.3.0",
+      "hashPath": "node.js.5.3.0.nupkg.sha512"
     },
     "runtime.linux-arm.runtime.native.System.IO.Ports/8.0.0": {
       "type": "package",

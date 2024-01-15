@@ -13,4 +13,7 @@
       <HintPath>..\packages\System.IO.Ports.8.0.0\lib\net462\System.IO.Ports.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include=".bin\node.cmd" />
+  </ItemGroup>
 </Project>
