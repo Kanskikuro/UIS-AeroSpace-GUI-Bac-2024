@@ -29,21 +29,29 @@ namespace Borealis2tsx.Server.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return new ReadDataPort
-                {
-                    Dataline = ["0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0"]
-                };
+                return new ReadDataPort {};
             }
             // First dataLine is maybe read from the middle of the line
             // dataLine is just read and "thrown away"
             // dataLine2 is the data being sent to UI
             string dataLine = port.ReadLine();
-            string datetime = DateTime.Now.ToString().Replace(" ", "T");
-            string dataLine2 = datetime + " " + port.ReadLine();
+            string dataLine2 = port.ReadLine();
             port.Close();
+            string[] splittedDataArray = dataLine2.Split(" ");
             return new ReadDataPort
             {
-                Dataline = dataLine2.Split(" ")
+                Temperature = splittedDataArray[0],
+                Pressure = splittedDataArray[1],
+                Altitude = splittedDataArray[2],
+                AccX = splittedDataArray[3],
+                AccY = splittedDataArray[4],
+                AccZ = splittedDataArray[5],
+                GyroX = splittedDataArray[6],
+                GyroY = splittedDataArray[7],
+                GyroZ = splittedDataArray[8],
+                MagX = splittedDataArray[9],
+                MagY = splittedDataArray[10],
+                MagZ = splittedDataArray[11],
             };
             // Temp[graderC] Pressure[mbar] altitude[m] accX[mg] accY[mg] accZ[mg] gyroX[degrees/s] gyroY[degrees/s] gyroZ[degrees/s] magX[µT] magY[µT] magZ[µT]  
         }
