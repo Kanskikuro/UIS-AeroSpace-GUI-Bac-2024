@@ -20,6 +20,12 @@ Since the application is still in development you will need to type in the conso
 dotnet restore
 ```
 
+To run the applicaiton you just need to write dotnet run in the console. 
+
+```console
+dotnet run
+```
+
 ## How to Use the Project
 
 ## Credit
