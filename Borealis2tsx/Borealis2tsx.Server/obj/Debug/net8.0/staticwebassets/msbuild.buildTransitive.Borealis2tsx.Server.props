@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Borealis2tsx.Server.props" />
-</Project>
