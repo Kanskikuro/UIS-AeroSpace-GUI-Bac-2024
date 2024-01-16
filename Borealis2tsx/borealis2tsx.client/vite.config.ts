@@ -5,6 +5,7 @@ import plugin from '@vitejs/plugin-react';
 import fs from 'fs';
 import path from 'path';
 import child_process from 'child_process';
+import tailwindcss from 'tailwindcss'
 
 const baseFolder =
     process.env.APPDATA !== undefined && process.env.APPDATA !== ''
@@ -43,6 +44,11 @@ export default defineConfig({
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
+    },
+    css: {
+        postcss: {
+            plugins: [tailwindcss],
+        },
     },
     server: {
         proxy: {

@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+    h1 {
+        @apply text-5xl;
+        @apply font-bold;
+        @apply my-3;
+        @apply my-3;
+    }
+    h2 {
+        @apply text-4xl;
+        @apply mb-2;
+    }
+    h3 {
+        @apply text-3xl;
+        @apply mb-2;
+    }
+    h4 {
+        @apply text-2xl;
+        @apply mb-2;
+    }
+    h5 {
+        @apply text-xl;
+        @apply mb-2;
+    }
+    h5 {
+        @apply text-lg;
+        @apply mb-2;
+    }
+    a {
+        @apply text-blue-600 underline;
+    }
+    p {
+        @apply mb-2;
+    }
+}
