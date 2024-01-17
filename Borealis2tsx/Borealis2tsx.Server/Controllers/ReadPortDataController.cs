@@ -1,8 +1,11 @@
 using System;
+using System.Globalization;
+using System.IO;
 using System.IO.Ports;
 using System.Runtime.InteropServices.JavaScript;
 using System.Threading;
 using System.Threading.Tasks;
+using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Borealis2tsx.Server.Controllers
@@ -12,12 +15,10 @@ namespace Borealis2tsx.Server.Controllers
     public class ReadPortDataController : ControllerBase
     {
         private readonly ILogger<ReadPortDataController> _logger;
-
         public ReadPortDataController(ILogger<ReadPortDataController> logger)
         {
             _logger = logger;
         }
-
         [HttpGet(Name = "GetReadPortData")]
         public ReadDataPort Get()
         {
@@ -37,8 +38,18 @@ namespace Borealis2tsx.Server.Controllers
             string dataLine = port.ReadLine();
             string dataLine2 = port.ReadLine();
             port.Close();
-            string[] splittedDataArray = dataLine2.Split(" ");
-            return new ReadDataPort
+            string similarDataLine2 = DateTime.Now.ToString().Replace(" ", "T") + " " + 
+                                      dataLine2
+                                          .Replace("\r\n", "")
+                                          .Replace("\r", "")
+                                          .Replace("\n", "") 
+                                      + " 0s";
+            string[] splittedDataArray = similarDataLine2.Split(" ");
+            splittedDataArray[11] = splittedDataArray[11].Replace("\r\n", "")
+                .Replace("\r", "")
+                .Replace("\n", "");
+            
+            ReadDataPort newOutputLine = new ReadDataPort
             {
                 Temperature = splittedDataArray[0],
                 Pressure = splittedDataArray[1],
@@ -51,8 +62,21 @@ namespace Borealis2tsx.Server.Controllers
                 GyroZ = splittedDataArray[8],
                 MagX = splittedDataArray[9],
                 MagY = splittedDataArray[10],
-                MagZ = splittedDataArray[11],
+                MagZ = splittedDataArray[11]
+                    .Replace("\r\n", "")
+                    .Replace("\r", "")
+                    .Replace("\n", ""),
             };
+            
+            using (FileStream fs = new FileStream("./output.txt", FileMode.Append, FileAccess.Write))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine(similarDataLine2);
+                }
+            }
+            
+            return newOutputLine;
             // Temp[graderC] Pressure[mbar] altitude[m] accX[mg] accY[mg] accZ[mg] gyroX[degrees/s] gyroY[degrees/s] gyroZ[degrees/s] magX[µT] magY[µT] magZ[µT]  
         }
     }

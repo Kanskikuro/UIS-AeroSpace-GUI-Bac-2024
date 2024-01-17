@@ -19,7 +19,8 @@ function LiveData() {
 
         const intervalId = setInterval(() => {
             fetchData()
-        }, 500);
+        }, 1000); // IMPORTANT: keep this above 1s so we have a primary key for the data,
+        // primary key being time.
 
         // Cleanup the interval on component unmount
         return () => {

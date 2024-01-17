@@ -1,3 +1,5 @@
+using CsvHelper.Configuration.Attributes;
+
 namespace Borealis2tsx.Server
 {
     /*TODO: this has to be changed once we know what kind of data we need
@@ -6,19 +8,46 @@ namespace Borealis2tsx.Server
     to change if we change the class */
     public class ReadDataPort
     {
+        [Name("startTime")]
         public string StartTime { get; set; } = DateTime.Now.ToString().Replace(" ", "T");
+        
+        [Name("temperature")]
         public string Temperature { get; set; } = "0.0";
+        
+        [Name("pressure")]
         public string Pressure { get; set; } = "0.0";
+        
+        [Name("altitude")]
         public string Altitude { get; set; } = "0.0";
+        
+        [Name("accX")]
         public string AccX { get; set; } = "0.0";
+        
+        [Name("accY")]
         public string AccY { get; set; } = "0.0";
+        
+        [Name("accZ")]
         public string AccZ { get; set; } = "0.0";
+        
+        [Name("gyroX")]
         public string GyroX { get; set; } = "0.0";
+        
+        [Name("gyroY")]
         public string GyroY { get; set; } = "0.0";
+        
+        [Name("gyroZ")]
         public string GyroZ { get; set; } = "0.0";
+        
+        [Name("magX")]
         public string MagX { get; set; } = "0.0";
+        
+        [Name("magY")]
         public string MagY { get; set; } = "0.0";
+        
+        [Name("magZ")]
         public string MagZ { get; set; } = "0.0";
+        
+        [Name("interval")]
         public string Interval { get; set; } = "0s";
     }
 }
