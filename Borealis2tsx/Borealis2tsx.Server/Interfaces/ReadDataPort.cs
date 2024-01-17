@@ -8,6 +8,8 @@ namespace Borealis2tsx.Server
     to change if we change the class */
     public class ReadDataPort
     {
+        // TODO add LaunchId
+        // TODO add LaunchName
         [Name("startTime")]
         public string StartTime { get; set; } = DateTime.Now.ToString().Replace(" ", "T");
         

@@ -70,6 +70,7 @@ namespace Borealis2tsx.Server.Controllers
                     .Replace("\n", ""),
             };
             
+            // CSV write to file (You can change file)
             using (FileStream fs = new FileStream("./output.txt", FileMode.Append, FileAccess.Write))
             {
                 using (StreamWriter sw = new StreamWriter(fs))
