@@ -38,12 +38,14 @@ namespace Borealis2tsx.Server.Controllers
             string dataLine = port.ReadLine();
             string dataLine2 = port.ReadLine();
             port.Close();
+            // data sent to csv
             string similarDataLine2 = DateTime.Now.ToString().Replace(" ", "T") + " " + 
                                       dataLine2
                                           .Replace("\r\n", "")
                                           .Replace("\r", "")
                                           .Replace("\n", "") 
                                       + " 0s";
+            // data for json, to React
             string[] splittedDataArray = similarDataLine2.Split(" ");
             splittedDataArray[11] = splittedDataArray[11].Replace("\r\n", "")
                 .Replace("\r", "")
