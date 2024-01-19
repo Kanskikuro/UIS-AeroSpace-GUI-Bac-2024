@@ -1,29 +1,39 @@
 # Uis Areospace Borealis 2.1 GUI
 
 ## Borealis 2.1
-Borealis 2.1 is Uis Areospace model rocket which has colabarative work with other bachelor theisis. The goal of borealis 2.1 is to be an improvement of Borealis 1.0. One of the biggest lessons we learned from Borealis 1.0 is to not have a manual button for start data recording as before launch it was forgotten. Since the Borealis 1.0 crashed 700m/s into the ground the locally saved data was lost thus there were no data from Borealis 1.0. 
+Borealis 2.1 is a collaborative effort within UIS Aerospace, developed as part of a bachelor's thesis project. The primary objective of Borealis 2.1 is to build upon the lessons learned from Borealis 1.0, aiming to be a significant improvement. One key lesson from Borealis 1.0 was the need to automate data recording to prevent oversight, especially given the loss of locally saved data when the previous model crashed at a speed of 700m/s.
 
 ## Description
-Borealis 2.1 GUI should take inputs from Borealis 2.1 and show it.
+The Borealis 2.1 GUI is designed to receive inputs from the Borealis 2.1 model rocket and present the collected data in a user-friendly interface.
 
-### Technology
-In Borealis 1.0 python PyQT was mainly used. In Borealis 2.1 we plan to use .Net and react because it provides more tools to make an GUI.
+### Technology stack
+For Borealis 1.0, Python with PyQt was predominantly used. In Borealis 2.1, we have chosen to utilize .Net and React due to their extensive toolsets for building graphical user interfaces.
+
+Frontend:
+1. React (Node.js, Vite.te)
+  - Tailwind
+  - Daysjs
+Backend:
+1. .Net
+   - Serial Port
+   - Csv Helper
+   - File Manager
+3. Entity Franework
 
 ## How to Install and Run the Project
 
-Clone this repository.
+1. Clone this repository.
+    ```console
+    git clone https://github.com/Kanskikuro/UIS-AeroSpace-GUI-Bac-2024.git
+    ```
+2. Install .Net 8 and Node.js.
 
-To run the Application you will need .Net 8 and Node.js installed. If youre not familiar with Node.js this [file](https://github.com/Kanskikuro/UIS-AeroSpace-GUI-Bac-2024/blob/main/Borealis2tsx/borealis2tsx.client/Necessities.md) will tell you how to run the applicaiton.
+3. Refer to [this file](https://github.com/Kanskikuro/UIS-AeroSpace-GUI-Bac-2024/blob/main/Borealis2tsx/borealis2tsx.client/Necessities.md) for instructions on running the application.
 
-Since the application is still in development you will need to type in the console. This is because npm install only installs dependencies for client not server.
+Since the application is still in development, you need to run the following commands in the console. This is necessary because npm install only installs dependencies for the client, not the server.
 
 ```console
 dotnet restore
-```
-
-To run the applicaiton you just need to write dotnet run in the console. 
-
-```console
 dotnet run
 ```
 
