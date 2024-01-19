@@ -32,10 +32,12 @@ namespace Borealis2tsx.Server.Controllers
                 Console.WriteLine(e);
                 return new ReadDataPort {};
             }
+
             // First dataLine is maybe read from the middle of the line
             // dataLine is just read and "thrown away"
-            // dataLine2 is the data being sent to UI
             string dataLine = port.ReadLine();
+
+            // dataLine2 is the data being sent to UI
             string dataLine2 = port.ReadLine();
             port.Close();
             // data sent to csv
