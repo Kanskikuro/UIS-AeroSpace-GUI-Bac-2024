@@ -9,6 +9,17 @@ Borealis 2.1 GUI should take inputs from Borealis 2.1 and show it.
 ### Technology
 In Borealis 1.0 python PyQT was mainly used. In Borealis 2.1 we plan to use .Net and react because it provides more tools to make an GUI.
 
+Frontend:
+1. React (Node.js, Vite.te)
+  - Tailwind
+  - Daysjs
+Backend:
+1. .Net
+   - Serial Port
+   - Csv Helper
+   - File Manager
+3. Entity Franework
+
 ## How to Install and Run the Project
 
 Clone this repository.
