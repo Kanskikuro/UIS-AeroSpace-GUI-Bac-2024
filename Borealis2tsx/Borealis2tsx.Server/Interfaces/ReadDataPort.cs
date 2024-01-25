@@ -1,6 +1,6 @@
 using CsvHelper.Configuration.Attributes;
 
-namespace Borealis2tsx.Server
+namespace Borealis2tsx.Server.Interface
 {
     /*TODO: 
     This has to be changed once we know what kind of data we need
@@ -14,7 +14,7 @@ namespace Borealis2tsx.Server
         public Guid LaunchId { get; set; } =  Guid.NewGuid();
 
         //Lets name to be date by default
-        //possible feature to pick between Launch, TestLaunch
+        //possible feature to pick between Launch, TestLaunch?
         [Name("LaunchName")]
         public string LaunchName { get; set; } = DateTime.Now.ToString();
 

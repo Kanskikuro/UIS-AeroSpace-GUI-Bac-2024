@@ -53,7 +53,7 @@ export default defineConfig({
     server: {
         proxy: {
             '^/readportdata': {
-                target: 'https://localhost:7054/',
+                target: 'http://localhost:5124/',
                 secure: false
             }
         },
