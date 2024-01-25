@@ -20,33 +20,39 @@ namespace Borealis2tsx.Server.Controllers
             _logger = logger;
         }
         [HttpGet(Name = "GetReadPortData")]
-        public ReadDataPort Get()
+        public ReadDataPort Get() 
+        /////////////////////Reading data from port///////////////////////////
         {
-            SerialPort port = new SerialPort("COM3", 115200, Parity.None, 8, StopBits.One);
+            _logger.LogInformation("Entering GetReadPortData controller action.");
+
+            //using "using" to ensure that the resources are prorperly released
+            using SerialPort port = new SerialPort("COM3", 115200, Parity.None, 8, StopBits.One);
             try
             {
                 port.Open();
+                _logger.LogInformation("Serial port opened successfully.");
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                //Console.WriteLine(e);
+                _logger.LogError($"Error opening serial port: {e.Message}");
                 return new ReadDataPort {};
             }
 
             // First dataLine is maybe read from the middle of the line
-            // dataLine is just read and "thrown away"
-            string dataLine = port.ReadLine();
-
-            // dataLine2 is the data being sent to UI
-            string dataLine2 = port.ReadLine();
+            string dataLine = port.ReadLine(); // dataLine is just read and "thrown away"
+            string dataLine2 = port.ReadLine();// dataLine2 is the data being sent to UI
             port.Close();
+
+            ////////////////////end of reading from port///////////////////
+            ///
+            ///////////////////Sending Data//////////////////////////
+
+
             // data sent to csv
-            string similarDataLine2 = DateTime.Now.ToString().Replace(" ", "T") + " " + 
-                                      dataLine2
-                                          .Replace("\r\n", "")
-                                          .Replace("\r", "")
-                                          .Replace("\n", "") 
-                                      + " 0s";
+            string timestampFormat = "yyyy-MM-ddTHH:mm:ss";
+            string similarDataLine2 = DateTime.Now.ToString(timestampFormat) + " " + dataLine2.Replace("\r\n", "").Replace("\r", "").Replace("\n", "") + " 0s";
+
             // data for json, to React
             string[] splittedDataArray = similarDataLine2.Split(" ");
             splittedDataArray[11] = splittedDataArray[11].Replace("\r\n", "")
@@ -80,9 +86,12 @@ namespace Borealis2tsx.Server.Controllers
                     sw.WriteLine(similarDataLine2);
                 }
             }
-            
+
+            _logger.LogInformation("Returning telemetry data.");
             return newOutputLine;
-            // Temp[graderC] Pressure[mbar] altitude[m] accX[mg] accY[mg] accZ[mg] gyroX[degrees/s] gyroY[degrees/s] gyroZ[degrees/s] magX[µT] magY[µT] magZ[µT]  
+            // Temp[graderC] Pressure[mbar] altitude[m] accX[mg] accY[mg] accZ[mg] gyroX[degrees/s] gyroY[degrees/s] gyroZ[degrees/s] magX[µT] magY[µT] magZ[µT]
+
+            ///////////////////end of sending data///////////////////////  
         }
     }
 }
