@@ -23,7 +23,7 @@ namespace Borealis2tsx.Server.Controllers
             _logger = logger;
             _readDataPortService = readDataPortService;
         }
-        [HttpGet(Name = "GetReadPortData")]
+        [HttpGet(Name = "Getreaddataport")]
         public ActionResult<ReadDataPort> Get() 
         {
             try
