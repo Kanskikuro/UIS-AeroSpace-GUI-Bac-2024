@@ -525,10 +525,8 @@ FodyWeavers.xsd
 *.msp
 
 # JetBrains Rider
-.idea
 
 # End of https://www.toptal.com/developers/gitignore/api/aspnetcore,csharp
 
 #Node module
 node_modules
-
