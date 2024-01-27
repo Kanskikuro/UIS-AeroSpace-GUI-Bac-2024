@@ -1,6 +1,6 @@
 @Borealis2tsx.Server_HostAddress = http://localhost:5124
 
-GET {{Borealis2tsx.Server_HostAddress}}/readportdata/
+GET {{Borealis2tsx.Server_HostAddress}}/readdataport/
 Accept: application/json
 
 ###

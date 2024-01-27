@@ -52,8 +52,8 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '^/readportdata': {
-                target: 'http://localhost:5124/',
+            '^/readdataport': {
+                target: 'https://localhost:7054/',
                 secure: false
             }
         },

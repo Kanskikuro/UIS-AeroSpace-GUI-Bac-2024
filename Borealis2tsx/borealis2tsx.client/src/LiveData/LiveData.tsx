@@ -30,7 +30,7 @@ function LiveData() {
 
     // functions should be after Hooks or outside the component
     async function ReadDataPortLine() {
-        const response = await fetch('readportdata');
+        const response = await fetch('readdataport');
         const data: ReadDataPort = await response.json();
         const elapsed: number = ((new Date()).getTime() - (startingTime).getTime()) / 1000;
         data.interval = String(elapsed) + "s";
