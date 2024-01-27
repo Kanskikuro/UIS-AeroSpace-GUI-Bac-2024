@@ -2,13 +2,17 @@ import {useEffect, useState} from 'react';
 // import './App.css';
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime';
-import ReadDataPort from "../interfaces/ReadDataPort.ts";
+
+interface ReadDataPort {
+    dataline: string[];
+}
+
 dayjs.extend(relativeTime);
 
 // component
 function LiveData() {
     // Variable declarations should always be in the top of the component
-    const [DataLine, setDataLine] = useState<ReadDataPort>();
+    const [Dataline, setDataline] = useState<ReadDataPort>();
     const saveData: ReadDataPort[] = [];
     let startingTime = new Date();
     // UseEffect and other hooks should be after variables declaration but before functions
@@ -33,69 +37,68 @@ function LiveData() {
         const response = await fetch('readportdata');
         const data: ReadDataPort = await response.json();
         const elapsed: number = ((new Date()).getTime() - (startingTime).getTime()) / 1000;
-        data.interval = String(elapsed) + "s";
-        setDataLine(data);
+        data.dataline.push(String(elapsed))
+        setDataline(data);
         saveData.push(data)
-        // console.log(saveData)
-        
+        console.log(saveData)
     }
 
     //this is a variable inside the returns of the appcomponent 
-    const contents = DataLine === undefined
+    const contents = Dataline === undefined
         ? <p>Loading...
         </p>
         : <div>
-            <p>Started session: {DataLine.interval.split(".")[0]}s ago</p>
-            <p>Date time: {DataLine.startTime}</p>
+            <p>Started session: {Dataline.dataline[13].split(".")[0]}s ago</p>
+            <p>Date time: {dayjs().format(Dataline.dataline[0])}</p>
             <div className={"flex w-[750px] justify-center"}>
-                <div id={"LiveDataContent"} className={'grid grid-cols-3 p-[10px] bg-blue-50 w-full text-center'}>
+                <div id={"LiveDataContent"} className={'grid grid-cols-3 p-[10px] bg-blue-50 w-full'}>
                     <div>
                         <b>Temp[graderC]</b>
-                        <p>{DataLine.temperature ?? "No Data"}</p>
+                        <p>{Dataline.dataline[1]}</p>
                     </div>
                     <div>
                         <b>Pressure[mbar]</b>
-                        <p>{DataLine.pressure ?? "No Data"}</p>
+                        <p>{Dataline.dataline[2]}</p>
                     </div>
                     <div>
                         <b>altitude[m]</b>
-                        <p>{DataLine.altitude ?? "No Data"}</p>
+                        <p>{Dataline.dataline[3]}</p>
                     </div>
                     <div>
                         <b>accX[mg]</b>
-                        <p>{DataLine.accX ?? "No Data"}</p>
+                        <p>{Dataline.dataline[4]}</p>
                     </div>
                     <div>
                         <b>accY[mg]</b>
-                        <p>{DataLine.accY ?? "No Data"}</p>
+                        <p>{Dataline.dataline[5]}</p>
                     </div>
                     <div>
                         <b>accZ[mg]</b>
-                        <p>{DataLine.accZ ?? "No Data"}</p>
+                        <p>{Dataline.dataline[6]}</p>
                     </div>
                     <div>
                         <b>gyroX[degrees/s]</b>
-                        <p>{DataLine.gyroX ?? "No Data"}</p>
+                        <p>{Dataline.dataline[7]}</p>
                     </div>
                     <div>
                         <b>gyroY[degrees/s]</b>
-                        <p>{DataLine.gyroY ?? "No Data"}</p>
+                        <p>{Dataline.dataline[8]}</p>
                     </div>
                     <div>
                         <b>gyroZ[degrees/s]</b>
-                        <p>{DataLine.gyroZ ?? "No Data"}</p>
+                        <p>{Dataline.dataline[9]}</p>
                     </div>
                     <div>
                         <b>magX[µT]</b>
-                        <p>{DataLine.magX ?? "No Data"}</p>
+                        <p>{Dataline.dataline[10]}</p>
                     </div>
                     <div>
                         <b>magY[µT]</b>
-                        <p>{DataLine.magY ?? "No Data"}</p>
+                        <p>{Dataline.dataline[11]}</p>
                     </div>
                     <div>
                         <b>magZ[µT]</b>
-                        <p>{DataLine.magZ ?? "No Data"}</p>
+                        <p>{Dataline.dataline[12]}</p>
                     </div>
                 </div>
             </div>
