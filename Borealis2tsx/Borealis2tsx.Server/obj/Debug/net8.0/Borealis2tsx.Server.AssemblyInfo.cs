@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Borealis2tsx.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ad8a272a22b7caca35ee4259c39046dd123a903")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c811fbf80cfee755e5e3dc2f5acc2b1b8bdd0c26")]
 [assembly: System.Reflection.AssemblyProductAttribute("Borealis2tsx.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Borealis2tsx.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
