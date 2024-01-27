@@ -5,9 +5,9 @@ using System.IO.Ports;
 using System.Runtime.InteropServices.JavaScript;
 using System.Threading;
 using System.Threading.Tasks;
+using Borealis2tsx.Server.Interfaces;
 using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
-using Borealis2tsx.Server.Interface;
 using Borealis2tsx.Server.Services;
 
 namespace Borealis2tsx.Server.Controllers
@@ -24,14 +24,14 @@ namespace Borealis2tsx.Server.Controllers
             _readDataPortService = readDataPortService;
         }
         [HttpGet(Name = "Getreaddataport")]
-        public ActionResult<ReadDataPort> Get() 
+        public ReadDataPort Get() 
         {
             try
             {
                 _logger.LogInformation("Fetching from ReadDataPortService");
 
                 // Call the ReadDataPort method of the ReadDataPortService
-                var ReadOutput = _readDataPortService.ReadDataPort();
+                ReadDataPort readOutput = _readDataPortService.ReadDataPort();
 
                 // CSV write to file (You can change file)
                 _logger.LogInformation("CSV write to file");
@@ -44,7 +44,7 @@ namespace Borealis2tsx.Server.Controllers
                 }
 
                 _logger.LogInformation("Returning port data.");
-                return  ReadOutput;
+                return  readOutput;
                 // Temp[graderC] Pressure[mbar] altitude[m] accX[mg] accY[mg] accZ[mg] gyroX[degrees/s] gyroY[degrees/s] gyroZ[degrees/s] magX[µT] magY[µT] magZ[µT]
             }
             catch (Exception e)

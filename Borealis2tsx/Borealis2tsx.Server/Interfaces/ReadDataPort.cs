@@ -1,6 +1,6 @@
 using CsvHelper.Configuration.Attributes;
 
-namespace Borealis2tsx.Server.Interface
+namespace Borealis2tsx.Server.Interfaces
 {
     /*TODO: 
     This has to be changed once we know what kind of data we need

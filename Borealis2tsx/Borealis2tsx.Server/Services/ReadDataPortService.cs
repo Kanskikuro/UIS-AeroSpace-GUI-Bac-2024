@@ -7,7 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
-using Borealis2tsx.Server.Interface;
+using Borealis2tsx.Server.Interfaces;
+
 namespace Borealis2tsx.Server.Services;
 public interface IReadDataPortService
 {
@@ -40,14 +41,14 @@ public class ReadDataPortService : IReadDataPortService
                 _logger.LogInformation("Serial port closed");
 
                 //Data part
-                string timestampFormat = "yyyy-MM-ddTHH:mm:ss";
-                string similarDataLine2 = DateTime.Now.ToString(timestampFormat) + " " + dataLine2.Replace("\r\n", "").Replace("\r", "").Replace("\n", "") + " 0s";
+                // string timestampFormat = "yyyy-MM-ddTHH:mm:ss";
+                string similarDataLine2 = dataLine2.Replace("\r\n", "").Replace("\r", "").Replace("\n", "") + " 0s";
                 string[] splittedDataArray = similarDataLine2.Split(" ");
                 splittedDataArray[11] = splittedDataArray[11].Replace("\r\n", "")
                     .Replace("\r", "")
                     .Replace("\n", "");
                 
-                ReadDataPort ReadOutput = new ReadDataPort
+                ReadDataPort readOutput = new ReadDataPort
                 {
                     Temperature = splittedDataArray[0],
                     Pressure = splittedDataArray[1],
@@ -66,7 +67,7 @@ public class ReadDataPortService : IReadDataPortService
                         .Replace("\n", ""),
                 };
                 _logger.LogInformation("Returning ReadDataPort ReadOutput");
-                return ReadOutput;
+                return readOutput;
             }
             catch (Exception e)
             {
