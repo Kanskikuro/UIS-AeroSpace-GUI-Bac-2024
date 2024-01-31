@@ -10,8 +10,9 @@ namespace Borealis2tsx.Server.Interfaces
     to change if we change the class */
     public class ReadDataPort
     {
-        [Name("LaunchId")]
-        public Guid LaunchId { get; set; } =  Guid.NewGuid();
+        // TODO assign Launch ID not generate a new one for each call
+        // [Name("LaunchId")]
+        // public Guid LaunchId { get; set; } =  Guid.NewGuid();
 
         //Lets name to be date by default
         //possible feature to pick between Launch, TestLaunch?
@@ -19,7 +20,7 @@ namespace Borealis2tsx.Server.Interfaces
         public string LaunchName { get; set; } = DateTime.Now.ToString();
 
         [Name("startTime")]
-        public string StartTime { get; set; } = DateTime.Now.ToString().Replace(" ", "T");
+        public string StartTime { get; set; } = DateTime.Now.ToString();
         
         [Name("temperature")]
         public string Temperature { get; set; } = "0.0";

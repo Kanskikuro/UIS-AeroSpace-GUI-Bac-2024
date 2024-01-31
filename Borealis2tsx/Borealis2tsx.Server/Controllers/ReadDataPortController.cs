@@ -33,13 +33,27 @@ namespace Borealis2tsx.Server.Controllers
                 // Call the ReadDataPort method of the ReadDataPortService
                 ReadDataPort readOutput = _readDataPortService.ReadDataPort();
 
+                string writeToCsv = readOutput.Temperature + " " +
+                                    readOutput.Pressure + " " +
+                                    readOutput.Altitude + " " +
+                                    readOutput.AccX + " " +
+                                    readOutput.AccY + " " +
+                                    readOutput.AccZ + " " +
+                                    readOutput.GyroX + " " +
+                                    readOutput.GyroY + " " +
+                                    readOutput.GyroZ + " " +
+                                    readOutput.MagX + " " +
+                                    readOutput.MagY + " " +
+                                    readOutput.MagZ + " " +
+                                    // readOutput.LaunchId + " " +
+                                    readOutput.StartTime;
                 // CSV write to file (You can change file)
                 _logger.LogInformation("CSV write to file");
                 using (FileStream fs = new FileStream("./output.txt", FileMode.Append, FileAccess.Write))
                 {
                     using (StreamWriter sw = new StreamWriter(fs))
                     {
-                        sw.WriteLine(DateTime.Now+"Borealis2.1");
+                        sw.WriteLine(writeToCsv);
                     }
                 }
 
