@@ -29,11 +29,29 @@ Dayjs is used to manipulate dates and play with them just as mathematics.
 
 [Dayjs documentation](https://day.js.org/docs/en/installation/typescript)
 
+### Ag-grid 
+Ag-grid is a table used to by big industrial firms to show data.
+It's very easy to use, has plenty of features, and highly flexible.
+
+[Ag-grid documentation](https://www.ag-grid.com/react-data-grid/getting-started/)
+
+### Apex-charts 
+Apex-charts is used to create graphs.
+[Apex-charts documentation](https://apexcharts.com/javascript-chart-demos/line-charts/basic/)
+
+### React Three Fiber 
+React Three Fiber and React Three Drei is used for the 3D model.
+
+[Video guide](https://www.youtube.com/watch?v=QaRIHrRclVk)
+
+
 ## C# .Net
 This application uses C# .Net as a backend service. It uses system.IO.Ports to communicate between serial port and UI.
+
 ### Serial port
 [Serial Port](https://learn.microsoft.com/en-us/dotnet/api/system.io.ports.serialport?view=dotnet-plat-ext-8.0)
 reads the data from the microcontroller and sends it to react as a json.
+
 ### CSV management
 For reading csv [CSV helper](https://joshclose.github.io/CsvHelper/getting-started/) is the optimal solution, since its quick and it does not store anything in memory.
 

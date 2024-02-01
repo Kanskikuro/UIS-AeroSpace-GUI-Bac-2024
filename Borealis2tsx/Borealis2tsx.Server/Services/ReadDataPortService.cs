@@ -48,7 +48,7 @@ public class ReadDataPortService : IReadDataPortService
     {
             //Data part
             // string timestampFormat = "yyyy-MM-ddTHH:mm:ss";
-            string similarDataLine2 = input.Replace("\r\n", "").Replace("\r", "").Replace("\n", "") + " 0s";
+            string similarDataLine2 = input.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
             string[] splittedDataArray = similarDataLine2.Split(" ");
             splittedDataArray[11] = splittedDataArray[11].Replace("\r\n", "")
                 .Replace("\r", "")
