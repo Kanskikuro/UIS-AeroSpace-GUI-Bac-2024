@@ -1,12 +1,5 @@
-using System;
-using System.Globalization;
-using System.IO;
 using System.IO.Ports;
-using System.Runtime.InteropServices.JavaScript;
-using System.Threading;
-using System.Threading.Tasks;
 using Borealis2tsx.Server.Interfaces;
-using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
 using Borealis2tsx.Server.Services;
 
@@ -31,7 +24,8 @@ namespace Borealis2tsx.Server.Controllers
                 _logger.LogInformation("Fetching from ReadDataPortService");
 
                 // Call the ReadDataPort method of the ReadDataPortService
-                ReadDataPort readOutput = _readDataPortService.ReadDataPort();
+                var port = new SerialPortWrapper("COM3", 115200, Parity.None, 8, StopBits.One);
+                ReadDataPort readOutput = _readDataPortService.ReadDataPort(port);
 
                 // CSV write to file (You can change file)
                 _logger.LogInformation("CSV write to file");
