@@ -12,5 +12,4 @@ export default interface ReadDataPort {
     magX: string;
     magY: string;
     magZ: string;
-    interval: string;
 }

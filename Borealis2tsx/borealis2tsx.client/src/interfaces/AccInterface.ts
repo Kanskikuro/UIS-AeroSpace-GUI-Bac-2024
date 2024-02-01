@@ -3,5 +3,4 @@ export default interface AccInterface {
     accX: number;
     accY: number;
     accZ: number;
-    interval: string;
 }

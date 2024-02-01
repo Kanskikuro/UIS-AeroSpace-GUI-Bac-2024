@@ -23,42 +23,39 @@ namespace Borealis2tsx.Server.Interfaces
         public string StartTime { get; set; } = DateTime.Now.ToString();
         
         [Name("temperature")]
-        public string Temperature { get; set; } = "0.0";
+        public string? Temperature { get; set; }
         
         [Name("pressure")]
-        public string Pressure { get; set; } = "0.0";
+        public string? Pressure { get; set; }
         
         [Name("altitude")]
-        public string Altitude { get; set; } = "0.0";
+        public string? Altitude { get; set; }
         
         [Name("accX")]
-        public string AccX { get; set; } = "0.0";
+        public string? AccX { get; set; }
         
         [Name("accY")]
-        public string AccY { get; set; } = "0.0";
+        public string? AccY { get; set; }
         
         [Name("accZ")]
-        public string AccZ { get; set; } = "0.0";
+        public string? AccZ { get; set; }
         
         [Name("gyroX")]
-        public string GyroX { get; set; } = "0.0";
+        public string? GyroX { get; set; }
         
         [Name("gyroY")]
-        public string GyroY { get; set; } = "0.0";
+        public string? GyroY { get; set; }
         
         [Name("gyroZ")]
-        public string GyroZ { get; set; } = "0.0";
+        public string? GyroZ { get; set; }
         
         [Name("magX")]
-        public string MagX { get; set; } = "0.0";
+        public string? MagX { get; set; }
         
         [Name("magY")]
-        public string MagY { get; set; } = "0.0";
+        public string? MagY { get; set; }
         
         [Name("magZ")]
-        public string MagZ { get; set; } = "0.0";
-        
-        [Name("interval")]
-        public string Interval { get; set; } = "0s";
+        public string? MagZ { get; set; }
     }
 }

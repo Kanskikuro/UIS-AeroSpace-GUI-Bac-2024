@@ -62,8 +62,8 @@ function LiveData() {
     async function ReadDataPortLine() {
         const response = await fetch('readdataport');
         const data: ReadDataPort = await response.json();
-        const elapsed: number = ((new Date()).getTime() - (startingTime).getTime()) / 1000;
-        data.interval = String(elapsed) + "s";
+        // const elapsed: number = ((new Date()).getTime() - (startingTime).getTime()) / 1000;
+        // data.interval = String(elapsed) + "s";
         setDataLine(data);
         updateData(data)
         // Acc lines
@@ -74,8 +74,7 @@ function LiveData() {
     // this what the component returns
     return (
         <div className={"ml-5"}>
-            <h1>UiS aerospace borealis 2.0</h1>
-            <h3 className={'text-teal-900'}>This component demonstrates getting data from the microcontroller.</h3>
+            <h1 className={'uppercase'}>UiS aerospace borealis 2.1</h1>
             <div>
                 {DataLine === undefined ? <p>Loading</p> : 
                     <div className={'grid grid-cols-3'}>
