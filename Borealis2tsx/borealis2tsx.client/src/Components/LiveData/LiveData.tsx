@@ -7,6 +7,8 @@ import AccChart from "../Charts/AccChart.tsx";
 import DataLineContent from "./DataLineContent.tsx";
 import LiveDataTable from "../Tables/LiveDataTable.tsx";
 import Rocket3Model from "../3dModel/Rocket3Model.tsx";
+import AltitudeChart from "../Charts/AltitudeChart.tsx";
+import AltitudeInterface from "../../interfaces/AltitudeInterface.ts";
 dayjs.extend(relativeTime);
 
 // component
@@ -15,6 +17,7 @@ function LiveData() {
     const [DataLine, setDataLine] = useState<ReadDataPort>();
     const [saveData, setSaveData] = useState<ReadDataPort[]>([]);
     const [saveAccData, setSaveAccData] = useState<AccInterface[]>([]);
+    const [saveAltitudeData, setSaveAltitudeData] = useState<AltitudeInterface[]>([]);
     let startingTime: Date = new Date();
     // UseEffect and other hooks should be after variables declaration but before functions
     useEffect(() => {
@@ -58,6 +61,16 @@ function LiveData() {
         }
         return;
     }
+    function updateAltitudeData (data: AltitudeInterface): void{
+        if (saveData.length >= 50){
+            const [firstElement, ...rest] = saveAltitudeData;
+            rest.push(data)
+            setSaveAltitudeData(rest)
+        }else{
+            setSaveAltitudeData(saveAltitudeData => [...saveAltitudeData, data]);
+        }
+        return;
+    }
     // functions should be after Hooks or outside the component
     async function ReadDataPortLine() {
         const response = await fetch('readdataport');
@@ -67,8 +80,10 @@ function LiveData() {
         setDataLine(data);
         updateData(data)
         // Acc lines
-        const AccLine: AccInterface = { startTime: new Date(data.startTime), accX: Number(data.accX), accY: Number(data.accY), accZ: Number(data.accZ), interval: data.interval}
+        const AccLine: AccInterface = { startTime: new Date(data.startTime), accX: Number(data.accX), accY: Number(data.accY), accZ: Number(data.accZ)}
         updateAccData(AccLine)
+        const AltitudeLine: AltitudeInterface = { startTime: new Date(data.startTime), altitude: Number(data.altitude)}
+        updateAltitudeData(AltitudeLine)
     }
     
     // this what the component returns
@@ -81,6 +96,7 @@ function LiveData() {
                         <div className={'px-2'}>
                             <DataLineContent DataLine={DataLine} />
                             <AccChart data={saveAccData} />
+                            <AltitudeChart data={saveAltitudeData} />
                         </div>
                         
                         <div className={'h-[300px] px-2 col-span-2'}>
