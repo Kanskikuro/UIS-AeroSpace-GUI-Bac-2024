@@ -18,7 +18,6 @@ function LiveData() {
     const [saveData, setSaveData] = useState<ReadDataPort[]>([]);
     const [saveAccData, setSaveAccData] = useState<AccInterface[]>([]);
     const [saveAltitudeData, setSaveAltitudeData] = useState<AltitudeInterface[]>([]);
-    let startingTime: Date = new Date();
     // UseEffect and other hooks should be after variables declaration but before functions
     useEffect(() => {
         const fetchData = async () => {
@@ -40,34 +39,13 @@ function LiveData() {
     // if you rerender the page the values disappear, since it's not connected to a db
     // It's beneficial to have it locally since values are quickly produced, and are only meant for live read
     // there will be another page for reading data from db
-    function updateAccData (AccData: AccInterface): void{
-        if (saveAccData.length >= 50){
-            const [firstElement, ...rest] = saveAccData;
-            rest.push(AccData)
-            setSaveAccData(rest)
-        }
-        else{
-            setSaveAccData(saveAccData => [...saveAccData, AccData])
-        }
-        return;
-    }
-    function updateData (data: ReadDataPort): void{
-        if (saveData.length >= 50){
-            const [firstElement, ...rest] = saveData;
+    function updateLimitedData (data: any, storedData: Array<any>, setLimitedData: Function, limit: number): void{
+        if (saveData.length >= limit){
+            const [firstElement, ...rest] = storedData;
             rest.push(data)
-            setSaveData(rest)
+            setLimitedData(rest)
         }else{
-            setSaveData(saveData => [...saveData, data]);
-        }
-        return;
-    }
-    function updateAltitudeData (data: AltitudeInterface): void{
-        if (saveData.length >= 50){
-            const [firstElement, ...rest] = saveAltitudeData;
-            rest.push(data)
-            setSaveAltitudeData(rest)
-        }else{
-            setSaveAltitudeData(saveAltitudeData => [...saveAltitudeData, data]);
+            setLimitedData(storedData => [...storedData, data]);
         }
         return;
     }
@@ -75,15 +53,20 @@ function LiveData() {
     async function ReadDataPortLine() {
         const response = await fetch('readdataport');
         const data: ReadDataPort = await response.json();
-        // const elapsed: number = ((new Date()).getTime() - (startingTime).getTime()) / 1000;
-        // data.interval = String(elapsed) + "s";
         setDataLine(data);
-        updateData(data)
-        // Acc lines
-        const AccLine: AccInterface = { startTime: new Date(data.startTime), accX: Number(data.accX), accY: Number(data.accY), accZ: Number(data.accZ)}
-        updateAccData(AccLine)
-        const AltitudeLine: AltitudeInterface = { startTime: new Date(data.startTime), altitude: Number(data.altitude)}
-        updateAltitudeData(AltitudeLine)
+        updateLimitedData(data, saveData, setSaveData, 30)
+        const AccLine: AccInterface = { 
+            startTime: new Date(data.startTime), 
+            accX: Number(data.accX), 
+            accY: Number(data.accY), 
+            accZ: Number(data.accZ)
+        }
+        updateLimitedData(AccLine, saveAccData, setSaveAccData, 30)
+        const AltitudeLine: AltitudeInterface = { 
+            startTime: new Date(data.startTime), 
+            altitude: Number(data.altitude)
+        }
+        updateLimitedData(AltitudeLine, saveAltitudeData, setSaveAltitudeData, 30)
     }
     
     // this what the component returns

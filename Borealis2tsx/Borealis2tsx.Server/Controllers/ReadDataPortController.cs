@@ -27,18 +27,18 @@ namespace Borealis2tsx.Server.Controllers
                 var port = new SerialPortWrapper("COM3", 115200, Parity.None, 8, StopBits.One);
                 ReadDataPort readOutput = _readDataPortService.ReadDataPort(port);
 
-                string writeToCsv = readOutput.Temperature + " " +
-                                    readOutput.Pressure + " " +
-                                    readOutput.Altitude + " " +
-                                    readOutput.AccX + " " +
-                                    readOutput.AccY + " " +
-                                    readOutput.AccZ + " " +
-                                    readOutput.GyroX + " " +
-                                    readOutput.GyroY + " " +
-                                    readOutput.GyroZ + " " +
-                                    readOutput.MagX + " " +
-                                    readOutput.MagY + " " +
-                                    readOutput.MagZ + " " +
+                string writeToCsv = readOutput.Temperature + ", " +
+                                    readOutput.Pressure + ", " +
+                                    readOutput.Altitude + ", " +
+                                    readOutput.AccX + ", " +
+                                    readOutput.AccY + ", " +
+                                    readOutput.AccZ + ", " +
+                                    readOutput.GyroX + ", " +
+                                    readOutput.GyroY + ", " +
+                                    readOutput.GyroZ + ", " +
+                                    readOutput.MagX + ", " +
+                                    readOutput.MagY + ", " +
+                                    readOutput.MagZ + ", " +
                                     // readOutput.LaunchId + " " +
                                     readOutput.StartTime;
                 // CSV write to file (You can change file)
