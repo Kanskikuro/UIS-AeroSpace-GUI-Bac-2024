@@ -56,21 +56,23 @@ public class ReadDataPortService : IReadDataPortService
 
             ReadDataPort readOutput = new ReadDataPort
             {
-                Temperature = splittedDataArray[0],
-                Pressure = splittedDataArray[1],
-                Altitude = splittedDataArray[2],
-                AccX = splittedDataArray[3],
-                AccY = splittedDataArray[4],
-                AccZ = splittedDataArray[5],
-                GyroX = splittedDataArray[6],
-                GyroY = splittedDataArray[7],
-                GyroZ = splittedDataArray[8],
-                MagX = splittedDataArray[9],
-                MagY = splittedDataArray[10],
-                MagZ = splittedDataArray[11]
-                    .Replace("\r\n", "")
-                    .Replace("\r", "")
-                    .Replace("\n", ""),
+                Temperature = decimal.Parse(splittedDataArray[0]).ToString("0"),
+                Pressure = decimal.Parse(splittedDataArray[1]).ToString("0"),
+                Altitude = decimal.Parse(splittedDataArray[2]).ToString("0"),
+                AccX = decimal.Parse(splittedDataArray[3]).ToString("0.00"),
+                AccY = decimal.Parse(splittedDataArray[4]).ToString("0.00"),
+                AccZ = decimal.Parse(splittedDataArray[5]).ToString("0.00"),
+                GyroX = decimal.Parse(splittedDataArray[6]).ToString("0.00"),
+                GyroY = decimal.Parse(splittedDataArray[7]).ToString("0.00"),
+                GyroZ = decimal.Parse(splittedDataArray[8]).ToString("0.00"),
+                MagX = decimal.Parse(splittedDataArray[9]).ToString("0.00"),
+                MagY = decimal.Parse(splittedDataArray[10]).ToString("0.00"),
+                MagZ = decimal.Parse(
+                        splittedDataArray[11]
+                            .Replace("\r\n", "")
+                            .Replace("\r", "")
+                            .Replace("\n", "")
+                        ).ToString("0.00")
             };
             _logger.LogInformation("Returning ReadDataPort ReadOutput");
             return readOutput;
