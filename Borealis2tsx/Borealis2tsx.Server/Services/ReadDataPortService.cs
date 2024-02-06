@@ -25,8 +25,7 @@ public class ReadDataPortService : IReadDataPortService
             // First dataLine is maybe read from the middle of the line
             string dataLine = port.ReadLine(); // dataLine is just read and "thrown away"
             string dataLine2 = port.ReadLine();// dataLine2 is the data being sent to UI
-
-            if (string.IsNullOrEmpty(dataLine)||string.IsNullOrEmpty(dataLine2))
+            if (string.IsNullOrEmpty(dataLine2))
             {
                 _logger.LogWarning("No data available from the serial port.");
                 port.Close();
@@ -48,7 +47,8 @@ public class ReadDataPortService : IReadDataPortService
     {
             //Data part
             // string timestampFormat = "yyyy-MM-ddTHH:mm:ss";
-            string similarDataLine2 = input.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+            string similarDataLine2 = input.Replace("\r\n", "")
+                .Replace("\r", "").Replace("\n", "");
             string[] splittedDataArray = similarDataLine2.Split(" ");
             splittedDataArray[11] = splittedDataArray[11].Replace("\r\n", "")
                 .Replace("\r", "")
