@@ -54,19 +54,20 @@ function LiveData() {
         const response = await fetch('readdataport');
         const data: ReadDataPort = await response.json();
         setDataLine(data);
-        updateLimitedData(data, saveData, setSaveData, 30)
+        const updateLimit: number = 60
+        updateLimitedData(data, saveData, setSaveData, updateLimit)
         const AccLine: AccInterface = { 
             startTime: new Date(data.startTime), 
             accX: Number(data.accX), 
             accY: Number(data.accY), 
             accZ: Number(data.accZ)
         }
-        updateLimitedData(AccLine, saveAccData, setSaveAccData, 30)
+        updateLimitedData(AccLine, saveAccData, setSaveAccData, updateLimit)
         const AltitudeLine: AltitudeInterface = { 
             startTime: new Date(data.startTime), 
             altitude: Number(data.altitude)
         }
-        updateLimitedData(AltitudeLine, saveAltitudeData, setSaveAltitudeData, 30)
+        updateLimitedData(AltitudeLine, saveAltitudeData, setSaveAltitudeData, updateLimit)
     }
     
     // this what the component returns
