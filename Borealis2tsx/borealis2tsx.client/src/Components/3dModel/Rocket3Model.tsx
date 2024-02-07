@@ -7,7 +7,7 @@ function ModelCar (props: any){
 }
 function Rocket3Model() {
     return (
-        <Canvas dpr={[1,2]} camera={{ fov: 45 }}>
+        <Canvas dpr={[1,2]} camera={{ fov: 35 }}>
             <color attach={'background'} args={['#101010']} />
             <PresentationControls speed={1.5} global zoom={0.5} polar={[-0.1, Math.PI/4]}>
                 <Stage environment={null}>

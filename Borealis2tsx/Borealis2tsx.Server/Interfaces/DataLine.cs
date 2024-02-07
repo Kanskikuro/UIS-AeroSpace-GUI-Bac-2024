@@ -8,7 +8,7 @@ namespace Borealis2tsx.Server.Interfaces
     Until then be careful with how you use this class.
     Use it cleverly in areas where it is not critical, nor time consuming
     to change if we change the class */
-    public class ReadDataPort
+    public class DataLine
     {
         // TODO assign Launch ID not generate a new one for each call
         // [Name("LaunchId")]
