@@ -3,45 +3,15 @@ using Borealis2tsx.Server.Interfaces;
 
 namespace Borealis2tsx.Server.Services;
 
-public interface IReadDataPortService
+public class ReadWriteDataBackgroundService : BackgroundService
 {
-    DataLine ReadDataPort(ISerialPort serialPort);
-    string ReadDataLines(ISerialPort serialPort);
-}
+    private readonly ILogger<ReadWriteDataBackgroundService> _logger;
 
-public class ReadDataPortService : IReadDataPortService
-{
-    private readonly ILogger<ReadDataPortService> _logger;
-
-    public ReadDataPortService(ILogger<ReadDataPortService> logger)
+    public ReadWriteDataBackgroundService(ILogger<ReadWriteDataBackgroundService> logger)
     {
         _logger = logger;
     }
-
-    public DataLine ReadDataPort(ISerialPort serialPort)
-    {
-        using ISerialPort port = serialPort;
-        try
-        {
-            port.Open();
-            // First dataLine is maybe read from the middle of the line
-            string dataLine = port.ReadLine(); // dataLine is just read and "thrown away"
-            string dataLine2 = port.ReadLine(); // dataLine2 is the data being sent to UI
-            if (string.IsNullOrEmpty(dataLine2))
-            {
-                _logger.LogWarning("No data available from the serial port.");
-                port.Close();
-                return new DataLine();
-            }
-            port.Close();
-            return NormalizeData(dataLine2);
-        }
-        catch (Exception e)
-        {
-            _logger.LogError($"Error in ReadDataPortService: {e.Message}");
-            return new DataLine();
-        }
-    }
+    
     public string ReadDataLines(ISerialPort serialPort)
     {
         using ISerialPort port = serialPort;
@@ -49,11 +19,10 @@ public class ReadDataPortService : IReadDataPortService
         {
             port.Open();
             string dataLines = "";
-            int limit = 20;
+            int limit = 12;
             for (int i = 0; i < limit; i++)
             {
                 // First dataLine is maybe read from the middle of the line
-                port.ReadLine(); // dataLine is just read and "thrown away"
                 port.ReadLine(); // dataLine is just read and "thrown away"
                 string dataLine2 = port.ReadLine();
                 if (dataLine2.Split(" ").Length == 12 && !string.IsNullOrEmpty(dataLine2))
@@ -98,7 +67,6 @@ public class ReadDataPortService : IReadDataPortService
             return emptyDataline;
         }
     }
-
     public DataLine NormalizeData(string input)
     {
         string similarDataLine2 = input.Replace("\r\n", "")
@@ -131,5 +99,27 @@ public class ReadDataPortService : IReadDataPortService
         };
         _logger.LogInformation("Returning ReadDataPort ReadOutput");
         return output;
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            var port = new SerialPortWrapper("COM3", 115200, Parity.None, 8, StopBits.One);
+            _logger.LogInformation("Reading from dataport and writing to csv");
+            string dataLinesToCsv = ReadDataLines(port);
+            Console.WriteLine(dataLinesToCsv);
+                
+            // CSV write to file (You can change file)
+            _logger.LogInformation("CSV write to file");
+            using (FileStream fs = new FileStream("./output.txt", FileMode.Append, FileAccess.Write))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine(dataLinesToCsv);
+                }
+            }
+            await Task.Delay(300, stoppingToken);
+        }
     }
 }

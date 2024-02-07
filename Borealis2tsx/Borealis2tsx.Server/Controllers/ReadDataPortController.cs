@@ -1,4 +1,5 @@
 using System.IO.Ports;
+using System.Runtime.InteropServices.JavaScript;
 using Borealis2tsx.Server.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Borealis2tsx.Server.Services;
@@ -26,19 +27,6 @@ namespace Borealis2tsx.Server.Controllers
                 // Call the ReadDataPort method of the ReadDataPortService
                 var port = new SerialPortWrapper("COM3", 115200, Parity.None, 8, StopBits.One);
                 DataLine output = _readDataPortService.ReadDataPort(port);
-
-                string dataLinesToCsv = _readDataPortService.ReadDataLines(port);
-                Console.WriteLine(dataLinesToCsv);
-                
-                // CSV write to file (You can change file)
-                _logger.LogInformation("CSV write to file");
-                using (FileStream fs = new FileStream("./output.txt", FileMode.Append, FileAccess.Write))
-                {
-                    using (StreamWriter sw = new StreamWriter(fs))
-                    {
-                        sw.WriteLine(dataLinesToCsv);
-                    }
-                }
 
                 _logger.LogInformation("Returning port data.");
                 return  output;
