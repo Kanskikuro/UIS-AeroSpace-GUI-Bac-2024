@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime';
-import ReadDataPort from "../../interfaces/ReadDataPort.ts";
+import Dataline from "../../interfaces/Dataline.ts";
 import AccInterface from "../../interfaces/AccInterface.ts";
 import AccChart from "../Charts/AccChart.tsx";
 import DataLineContent from "./DataLineContent.tsx";
@@ -14,8 +14,8 @@ dayjs.extend(relativeTime);
 // component
 function LiveData() {
     // Variable declarations should always be in the top of the component
-    const [DataLine, setDataLine] = useState<ReadDataPort>();
-    const [saveData, setSaveData] = useState<ReadDataPort[]>([]);
+    const [DataLine, setDataLine] = useState<Dataline>();
+    const [saveData, setSaveData] = useState<Dataline[]>([]);
     const [saveAccData, setSaveAccData] = useState<AccInterface[]>([]);
     const [saveAltitudeData, setSaveAltitudeData] = useState<AltitudeInterface[]>([]);
     // UseEffect and other hooks should be after variables declaration but before functions
@@ -26,7 +26,7 @@ function LiveData() {
 
         const intervalId = setInterval(() => {
             fetchData()
-        }, 1000); // IMPORTANT: keep this above 1s so we have a primary key for the data,
+        }, 700); // IMPORTANT: keep this above 1s so we have a primary key for the data,
         // primary key being time.
 
         // Cleanup the interval on component unmount
@@ -52,19 +52,19 @@ function LiveData() {
     // functions should be after Hooks or outside the component
     async function ReadDataPortLine() {
         const response = await fetch('readdataport');
-        const data: ReadDataPort = await response.json();
+        const data: Dataline = await response.json();
         setDataLine(data);
         const updateLimit: number = 60
         updateLimitedData(data, saveData, setSaveData, updateLimit)
         const AccLine: AccInterface = { 
-            startTime: new Date(data.startTime), 
+            time: new Date(data.time), 
             accX: Number(data.accX), 
             accY: Number(data.accY), 
             accZ: Number(data.accZ)
         }
         updateLimitedData(AccLine, saveAccData, setSaveAccData, updateLimit)
         const AltitudeLine: AltitudeInterface = { 
-            startTime: new Date(data.startTime), 
+            time: new Date(data.time), 
             altitude: Number(data.altitude)
         }
         updateLimitedData(AltitudeLine, saveAltitudeData, setSaveAltitudeData, updateLimit)

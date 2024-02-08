@@ -21,7 +21,7 @@ function AccChart(props: { data: AccInterface[] }) {
             },
         ],
         xaxis: {
-            categories: props.data.map(data => data.startTime),
+            categories: props.data.map(data => data.time),
         },
     };
     return (
