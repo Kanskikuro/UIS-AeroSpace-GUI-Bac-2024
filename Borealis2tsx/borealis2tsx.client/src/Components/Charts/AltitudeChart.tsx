@@ -29,7 +29,7 @@ function AltitudeChart(props: { data: AltitudeInterface[] }) {
             },
         ],
         xaxis: {
-            categories: props.data.map(data => data.startTime.toLocaleTimeString()),
+            categories: props.data.map(data => data.time.toLocaleTimeString()),
             tickAmount: 10,
         },
     };

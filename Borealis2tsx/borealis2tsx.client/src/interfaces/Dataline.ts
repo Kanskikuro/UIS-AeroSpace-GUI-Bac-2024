@@ -1,5 +1,5 @@
-export default interface ReadDataPort {
-    startTime: string;
+export default interface Dataline {
+    time: string;
     temperature: string;
     pressure: string;
     altitude: string;

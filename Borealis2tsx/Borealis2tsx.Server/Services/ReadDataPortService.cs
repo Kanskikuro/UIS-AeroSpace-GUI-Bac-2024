@@ -71,7 +71,7 @@ public class ReadDataPortService : IReadDataPortService
                                               normalizedDataline.MagX + ", " +
                                               normalizedDataline.MagY + ", " +
                                               normalizedDataline.MagZ + ", " +
-                                              normalizedDataline.StartTime;
+                                              normalizedDataline.Time;
                     Thread.Sleep(80);
                     dataLines += filteredDataline + (i >= limit-1 ? "" : "\n");
                 }
@@ -107,10 +107,10 @@ public class ReadDataPortService : IReadDataPortService
         splittedDataArray[11] = splittedDataArray[11].Replace("\r\n", "")
             .Replace("\r", "")
             .Replace("\n", "");
-
+        Console.WriteLine(splittedDataArray);
         DataLine output = new DataLine
         {
-            StartTime = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss.ff"),
+            Time = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss.ff"),
             Temperature = decimal.Parse(splittedDataArray[0]).ToString("0")?? null,
             Pressure = decimal.Parse(splittedDataArray[1]).ToString("0")?? null,
             Altitude = decimal.Parse(splittedDataArray[2]).ToString("0")?? null,

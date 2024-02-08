@@ -1,7 +1,7 @@
-import ReadDataPort from "../../interfaces/ReadDataPort.ts";
+import Dataline from "../../interfaces/Dataline.ts";
 
-function DataLineContent(props: { DataLine: ReadDataPort | undefined }) {
-    const DataLine: ReadDataPort | undefined = props.DataLine
+function DataLineContent(props: { DataLine: Dataline | undefined }) {
+    const DataLine: Dataline | undefined = props.DataLine
     return (
         <div>
             <div className={"flex w-full justify-center"}>

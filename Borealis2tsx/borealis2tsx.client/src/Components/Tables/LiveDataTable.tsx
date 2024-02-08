@@ -2,13 +2,13 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import {AgGridReact} from 'ag-grid-react';
 import {useMemo, useState} from 'react';
-import ReadDataPort from "../../interfaces/ReadDataPort.ts";
+import Dataline from "../../interfaces/Dataline.ts";
 
-const LiveDataTable = (props: { data: ReadDataPort[] }) => {
+const LiveDataTable = (props: { data: Dataline[] }) => {
     const containerStyle = useMemo(() => ({width: '100%', height: '100%'}), []);
     const gridStyle = useMemo(() => ({height: '100%', width: '100%'}), []);
     const [columnDefs, setColumnDefs] = useState([
-        {field: 'startTime', sort: 'desc', width: '200px'},
+        {field: 'time', sort: 'desc', width: '200px'},
         {field: 'temperature'},
         {field: 'pressure'},
         {field: 'altitude'},

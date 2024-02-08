@@ -1,4 +1,4 @@
 export default interface AltitudeInterface {
-    startTime: Date;
+    time: Date;
     altitude: number;
 }
