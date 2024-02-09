@@ -1,5 +1,5 @@
 export default interface AccInterface {
-    startTime: Date;
+    time: Date;
     accX: number;
     accY: number;
     accZ: number;

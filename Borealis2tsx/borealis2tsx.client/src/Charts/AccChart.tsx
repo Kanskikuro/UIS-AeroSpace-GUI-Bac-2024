@@ -1,7 +1,9 @@
 import ReactApexChart from 'react-apexcharts';
-import AltitudeInterface from "../../interfaces/AltitudeInterface.ts";
+import AccInterface from "../interfaces/AccInterface.ts";
 
-function AltitudeChart(props: { data: AltitudeInterface[] }) {
+function AccChart(props: { data: AccInterface[] }) {
+    console.log(props)
+    
     let chartOptions: {
         xaxis: { categories: string[] };
         series: { data: number[]; name: string }[];
@@ -10,32 +12,21 @@ function AltitudeChart(props: { data: AltitudeInterface[] }) {
     chartOptions = {
         // Define your chart options here
         chart: {
-            id: 'Altitude',
             type: 'line',
-            stroke: {
-                curve: 'smooth'
-            },
-            toolbar: {
-                show: false
-            },
-            zoom: {
-                enabled: false
-            }
         },
         series: [
             {
-                name: 'Altitude data',
-                data: props.data.map(data => data.altitude)
+                name: 'AccX value',
+                data: props.data.map(data => data.accX),
             },
         ],
         xaxis: {
-            categories: props.data.map(data => data.time.toLocaleTimeString()),
-            tickAmount: 10,
+            categories: props.data.map(data => data.time),
         },
     };
-
     return (
         <div>
+            {props.data.length ?? ''}
             <ReactApexChart
                 options={chartOptions}
                 series={chartOptions.series}
@@ -46,4 +37,4 @@ function AltitudeChart(props: { data: AltitudeInterface[] }) {
     )
 }
 
-export default AltitudeChart
+export default AccChart

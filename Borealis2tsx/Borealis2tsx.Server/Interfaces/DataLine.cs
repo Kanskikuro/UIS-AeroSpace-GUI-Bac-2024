@@ -8,7 +8,7 @@ namespace Borealis2tsx.Server.Interfaces
     Until then be careful with how you use this class.
     Use it cleverly in areas where it is not critical, nor time consuming
     to change if we change the class */
-    public class ReadDataPort
+    public class DataLine
     {
         // TODO assign Launch ID not generate a new one for each call
         // [Name("LaunchId")]
@@ -16,11 +16,8 @@ namespace Borealis2tsx.Server.Interfaces
 
         //Lets name to be date by default
         //possible feature to pick between Launch, TestLaunch?
-        [Name("LaunchName")]
-        public string LaunchName { get; set; } = DateTime.Now.ToString();
-
-        [Name("startTime")]
-        public string StartTime { get; set; } = DateTime.Now.ToString();
+        [Name("time")]
+        public string Time { get; set; } = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss.ff");
         
         [Name("temperature")]
         public string? Temperature { get; set; }

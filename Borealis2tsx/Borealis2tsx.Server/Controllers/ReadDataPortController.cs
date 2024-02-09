@@ -1,4 +1,5 @@
 using System.IO.Ports;
+using System.Runtime.InteropServices.JavaScript;
 using Borealis2tsx.Server.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Borealis2tsx.Server.Services;
@@ -17,7 +18,7 @@ namespace Borealis2tsx.Server.Controllers
             _readDataPortService = readDataPortService;
         }
         [HttpGet(Name = "Getreaddataport")]
-        public ReadDataPort Get() 
+        public DataLine Get() 
         {
             try
             {
@@ -25,40 +26,16 @@ namespace Borealis2tsx.Server.Controllers
 
                 // Call the ReadDataPort method of the ReadDataPortService
                 var port = new SerialPortWrapper("COM3", 115200, Parity.None, 8, StopBits.One);
-                ReadDataPort readOutput = _readDataPortService.ReadDataPort(port);
-
-                string writeToCsv = readOutput.Temperature + ", " +
-                                    readOutput.Pressure + ", " +
-                                    readOutput.Altitude + ", " +
-                                    readOutput.AccX + ", " +
-                                    readOutput.AccY + ", " +
-                                    readOutput.AccZ + ", " +
-                                    readOutput.GyroX + ", " +
-                                    readOutput.GyroY + ", " +
-                                    readOutput.GyroZ + ", " +
-                                    readOutput.MagX + ", " +
-                                    readOutput.MagY + ", " +
-                                    readOutput.MagZ + ", " +
-                                    // readOutput.LaunchId + " " +
-                                    readOutput.StartTime;
-                // CSV write to file (You can change file)
-                _logger.LogInformation("CSV write to file");
-                using (FileStream fs = new FileStream("./output.txt", FileMode.Append, FileAccess.Write))
-                {
-                    using (StreamWriter sw = new StreamWriter(fs))
-                    {
-                        sw.WriteLine(writeToCsv);
-                    }
-                }
+                DataLine output = _readDataPortService.ReadDataLine(port);
 
                 _logger.LogInformation("Returning port data.");
-                return  readOutput;
+                return  output;
                 // Temp[graderC] Pressure[mbar] altitude[m] accX[mg] accY[mg] accZ[mg] gyroX[degrees/s] gyroY[degrees/s] gyroZ[degrees/s] magX[µT] magY[µT] magZ[µT]
             }
             catch (Exception e)
             {
                 _logger.LogError($"Error opening serial port: {e.Message}");
-                return new ReadDataPort {};
+                return new DataLine {};
             }
         }
     }
