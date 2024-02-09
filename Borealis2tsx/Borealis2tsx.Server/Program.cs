@@ -1,6 +1,6 @@
 using Borealis2tsx.Server.Services;
 using Microsoft.EntityFrameworkCore;
-using Borealis2tsx.Server.Data;
+using Borealis2tsx.Server.DataDBContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 
 
 // DB connectionstring
-builder.Services.AddDbContext<PersonDbContext>(options =>
+builder.Services.AddDbContext<DataLineDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
