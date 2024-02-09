@@ -15,7 +15,7 @@ public class PortHandlerBackgroundService : BackgroundService
         _logger = logger;
     }
 
-    public DataLine ReadDataPort(ISerialPort serialPort)
+    public DataLine ReadDataLine(ISerialPort serialPort)
     {
         using ISerialPort port = serialPort;
         try
@@ -80,7 +80,7 @@ public class PortHandlerBackgroundService : BackgroundService
             var port = new SerialPortWrapper("COM3", 115200, Parity.None, 8, StopBits.One);
             _logger.LogInformation("Reading from dataport and writing to csv");
 
-            DataLine DataToStoredCSV = ReadDataPort(port);
+            DataLine DataToStoredCSV = ReadDataLine(port);
             string filteredDataline = DataToStoredCSV.Temperature + ", " +
                                       DataToStoredCSV.Pressure + ", " +
                                       DataToStoredCSV.Altitude + ", " +
