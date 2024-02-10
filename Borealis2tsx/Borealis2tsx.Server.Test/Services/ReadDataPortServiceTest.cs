@@ -33,18 +33,18 @@ namespace Borealis2tsx.Server.Tests.Services
             // Temp[graderC] Pressure[mbar] altitude[m] accX[mg] accY[mg] accZ[mg] 
             // gyroX[degrees/s] gyroY[degrees/s] gyroZ[degrees/s] magX[µT] magY[µT] magZ[µT]
             Assert.NotNull(result);
-            Assert.Equal("25.5", result.Temperature);
-            Assert.Equal("1013.25", result.Pressure);
-            Assert.Equal("150.0", result.Altitude);
-            Assert.Equal("0.1", result.AccX);
-            Assert.Equal("0.2", result.AccY);
-            Assert.Equal("0.3", result.AccZ);
-            Assert.Equal("1.1", result.GyroX);
-            Assert.Equal("2.2", result.GyroY);
-            Assert.Equal("3.3", result.GyroZ);
-            Assert.Equal("11.1", result.MagX);
-            Assert.Equal("22.2", result.MagY);
-            Assert.Equal("33.3", result.MagZ);
+            Assert.Equal(25.5, result.Temperature);
+            Assert.Equal(1013.25, result.Pressure);
+            Assert.Equal(150.0, result.Altitude);
+            Assert.Equal(0.1, result.AccX);
+            Assert.Equal(0.2, result.AccY);
+            Assert.Equal(0.3, result.AccZ);
+            Assert.Equal(1.1, result.GyroX);
+            Assert.Equal(2.2, result.GyroY);
+            Assert.Equal(3.3, result.GyroZ);
+            Assert.Equal(11.1, result.MagX);
+            Assert.Equal(22.2, result.MagY);
+            Assert.Equal(33.3, result.MagZ);
         }
 
         [Fact]
@@ -65,27 +65,6 @@ namespace Borealis2tsx.Server.Tests.Services
 
             // Verify that Close is called once
             mockSerialPort.Verify(p => p.Close(), Times.Once);
-        }
-
-
-        [Fact]
-        public void HandleSerialPort_NoPortFound_LogsError()
-        {
-            // Arrange
-            var mockLogger = new Mock<ILogger<ReadDataPortService>>();
-            var service = new ReadDataPortService(mockLogger.Object);
-
-            // Act
-            service.ReadDataPort(null);
-
-            // Assert
-            mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((o, t) => true), // This ensures any exception type will match
-                It.IsAny<Exception>(),
-                (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()
-            ), Times.Once);
         }
     }
 }

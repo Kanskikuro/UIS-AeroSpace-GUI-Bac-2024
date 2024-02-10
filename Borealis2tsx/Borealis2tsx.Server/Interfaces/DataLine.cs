@@ -17,42 +17,42 @@ namespace Borealis2tsx.Server.Interfaces
         //Lets name to be date by default
         //possible feature to pick between Launch, TestLaunch?
         [Name("time")]
-        public string Time { get; set; } = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss.ff");
+        public DateTimeOffset Time { get; set; } = DateTimeOffset.Now;
         
         [Name("temperature")]
-        public string? Temperature { get; set; }
+        public double ? Temperature { get; set; }
         
         [Name("pressure")]
-        public string? Pressure { get; set; }
+        public double? Pressure { get; set; }
         
         [Name("altitude")]
-        public string? Altitude { get; set; }
+        public double? Altitude { get; set; }
         
         [Name("accX")]
-        public string? AccX { get; set; }
+        public double? AccX { get; set; }
         
         [Name("accY")]
-        public string? AccY { get; set; }
+        public double? AccY { get; set; }
         
         [Name("accZ")]
-        public string? AccZ { get; set; }
+        public double? AccZ { get; set; }
         
         [Name("gyroX")]
-        public string? GyroX { get; set; }
+        public double? GyroX { get; set; }
         
         [Name("gyroY")]
-        public string? GyroY { get; set; }
+        public double? GyroY { get; set; }
         
         [Name("gyroZ")]
-        public string? GyroZ { get; set; }
+        public double? GyroZ { get; set; }
         
         [Name("magX")]
-        public string? MagX { get; set; }
+        public double? MagX { get; set; }
         
         [Name("magY")]
-        public string? MagY { get; set; }
+        public double? MagY { get; set; }
         
         [Name("magZ")]
-        public string? MagZ { get; set; }
+        public double? MagZ { get; set; }
     }
 }

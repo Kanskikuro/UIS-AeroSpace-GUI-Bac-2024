@@ -50,24 +50,23 @@ public class PortHandlerBackgroundService : BackgroundService
 
         DataLine output = new DataLine
         {
-            Time = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss.ff"),
-            Temperature = decimal.Parse(splittedDataArray[0]).ToString("0") ?? null,
-            Pressure = decimal.Parse(splittedDataArray[1]).ToString("0") ?? null,
-            Altitude = decimal.Parse(splittedDataArray[2]).ToString("0") ?? null,
-            AccX = decimal.Parse(splittedDataArray[3]).ToString("0.00") ?? null,
-            AccY = decimal.Parse(splittedDataArray[4]).ToString("0.00") ?? null,
-            AccZ = decimal.Parse(splittedDataArray[5]).ToString("0.00") ?? null,
-            GyroX = decimal.Parse(splittedDataArray[6]).ToString("0.00") ?? null,
-            GyroY = decimal.Parse(splittedDataArray[7]).ToString("0.00") ?? null,
-            GyroZ = decimal.Parse(splittedDataArray[8]).ToString("0.00") ?? null,
-            MagX = decimal.Parse(splittedDataArray[9]).ToString("0.00") ?? null,
-            MagY = decimal.Parse(splittedDataArray[10]).ToString("0.00") ?? null,
-            MagZ = decimal.Parse(
-                splittedDataArray[11]
-                    .Replace("\r\n", "")
+            //Function / loop?
+            Time = DateTimeOffset.Now,
+            Temperature = double.Parse(splittedDataArray[0]),
+            Pressure = string.IsNullOrWhiteSpace(splittedDataArray[1]) ? null : double.Parse(splittedDataArray[1]) ,
+            Altitude = string.IsNullOrWhiteSpace(splittedDataArray[2])?null:double.Parse(splittedDataArray[1]),
+            AccX = string.IsNullOrWhiteSpace(splittedDataArray[3])?null:double.Parse(splittedDataArray[1]),
+            AccY = string.IsNullOrWhiteSpace(splittedDataArray[4])?null:double.Parse(splittedDataArray[1]),
+            AccZ = string.IsNullOrWhiteSpace(splittedDataArray[5])?null:double.Parse(splittedDataArray[1]),
+            GyroX = string.IsNullOrWhiteSpace(splittedDataArray[6])?null:double.Parse(splittedDataArray[1]),
+            GyroY = string.IsNullOrWhiteSpace(splittedDataArray[7])?null:double.Parse(splittedDataArray[1]),
+            GyroZ = string.IsNullOrWhiteSpace(splittedDataArray[8])?null:double.Parse(splittedDataArray[1]),
+            MagX = string.IsNullOrWhiteSpace(splittedDataArray[9])?null:double.Parse(splittedDataArray[1]),
+            MagY = string.IsNullOrWhiteSpace(splittedDataArray[10])?null:double.Parse(splittedDataArray[1]),
+            MagZ = string.IsNullOrWhiteSpace(splittedDataArray[11].Replace("\r\n", "")
                     .Replace("\r", "")
-                    .Replace("\n", "")
-            ).ToString("0.00") ?? null
+                    .Replace("\n", ""))
+                    ?null:double.Parse(splittedDataArray[1])
         };
         _logger.LogInformation("Returning ReadDataPort ReadOutput");
         return output;
