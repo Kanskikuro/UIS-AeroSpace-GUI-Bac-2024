@@ -26,7 +26,7 @@ namespace Borealis2tsx.Server.Controllers
 
                 // Call the ReadDataPort method of the ReadDataPortService
                 var port = new SerialPortWrapper("COM3", 115200, Parity.None, 8, StopBits.One);
-                DataLine output = _readDataPortService.ReadDataPort(port);
+                DataLine output = _readDataPortService.ReadDataLine(port);
 
                 _logger.LogInformation("Returning port data.");
                 return  output;
