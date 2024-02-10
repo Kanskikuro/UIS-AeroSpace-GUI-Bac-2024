@@ -26,7 +26,7 @@ namespace Borealis2tsx.Server.Tests.Services
                 .Returns(testInput2);
 
             // Act
-            var result = service.ReadDataPort(mockSerialPort.Object);
+            var result = service.ReadDataLine(mockSerialPort.Object);
 
             // Assert
             // Adjust the expected result based on your service logic
@@ -58,7 +58,7 @@ namespace Borealis2tsx.Server.Tests.Services
             var mockSerialPort = new Mock<ISerialPort>();
 
             // Act
-            var result = service.ReadDataPort(mockSerialPort.Object);
+            var result = service.ReadDataLine(mockSerialPort.Object);
 
             // Verify that Open is called once
             mockSerialPort.Verify(p => p.Open(), Times.Once);

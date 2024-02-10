@@ -5,7 +5,7 @@ namespace Borealis2tsx.Server.Services;
 
 public interface IReadDataPortService
 {
-    DataLine ReadDataPort(ISerialPort serialPort);
+    DataLine ReadDataLine(ISerialPort serialPort);
     string ReadDataLines(ISerialPort serialPort);
 }
 
@@ -18,7 +18,7 @@ public class ReadDataPortService : IReadDataPortService
         _logger = logger;
     }
 
-    public DataLine ReadDataPort(ISerialPort serialPort)
+    public DataLine ReadDataLine(ISerialPort serialPort)
     {
         using ISerialPort port = serialPort;
         try

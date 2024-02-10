@@ -27,7 +27,7 @@ namespace Borealis2tsx.Server.Controllers
                 // Call the ReadDataPort method of the ReadDataPortService
                 var port = new SerialPortWrapper("COM3", 115200, Parity.None, 8, StopBits.One);
                 DataLine output = _readDataPortService.ReadDataPort(port);
-                
+
                 _logger.LogInformation("Returning port data.");
                 return  output;
                 // Temp[graderC] Pressure[mbar] altitude[m] accX[mg] accY[mg] accZ[mg] gyroX[degrees/s] gyroY[degrees/s] gyroZ[degrees/s] magX[µT] magY[µT] magZ[µT]

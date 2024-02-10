@@ -21,7 +21,7 @@ function LiveData() {
     // UseEffect and other hooks should be after variables declaration but before functions
     useEffect(() => {
         const fetchData = async () => {
-            await ReadDataPortLine();
+            await ReadDataLine();
         };
 
         const intervalId = setInterval(() => {
@@ -50,7 +50,7 @@ function LiveData() {
         return;
     }
     // functions should be after Hooks or outside the component
-    async function ReadDataPortLine() {
+    async function ReadDataLine() {
         const response = await fetch('readdataport');
         const data: Dataline = await response.json();
         setDataLine(data);
@@ -73,9 +73,8 @@ function LiveData() {
     // this what the component returns
     return (
         <div className={"ml-5"}>
-            <h1 className={'uppercase'}>UiS aerospace borealis 2.1</h1>
             <div>
-                {DataLine === undefined ? <p>Loading</p> : 
+                {DataLine === undefined ? <img className={'h-[900px] ml-auto mr-auto'} src={'../public/Patch_borealis.png'} alt={"loading"}/> : 
                     <div className={'grid grid-cols-3'}>
                         <div className={'px-2'}>
                             <DataLineContent DataLine={DataLine} />
